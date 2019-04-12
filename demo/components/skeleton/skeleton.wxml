@@ -2,7 +2,7 @@
 <view
   style="background-color: {{ bgcolor || '#FFF' }}; {{ isDev ? devData.container : data.container }}"
   class="skeleton skeleton_{{loading}}"
-  wx:if="{{ isShowByDev }}"
+  wx:if="{{ !isDev || isShowByDev }}"
 >
   <block wx:for="{{ isDev ? devData.lists : data.lists }}" wx:for-item="list" wx:key="type">
     <view
@@ -16,9 +16,6 @@
     <view class="skeleton__spin" />
   </view>
   <view class="skeleton__shine"/>
-</view>
-<view wx:else>
-  <slot></slot>
 </view>
 <skeleton-btn
   wx:if="{{ isDev }}"

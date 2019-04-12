@@ -1,7 +1,13 @@
 <!--index.wxml-->
-<skeleton loading="{{ selectedLoadingType }}" bgcolor="{{ bgcolor }}" isDev="true"></skeleton>
+<skeleton
+  loading="{{ skeletonSelectedLoadingType }}"
+  bgcolor="{{ skeletonBgcolor }}"
+  isDev="{{ skeletonIsDev }}"
+  data="{{ skeletonData }}"
+  wx:if="{{ !pageIsReady || skeletonIsDev }}"
+></skeleton>
 
-<view class="page skeleton">
+<view class="page skeleton" wx:if="{{ pageIsReady }}">
   <view class="search-bar skeleton-rect">
     Hello, Search
   </view>
@@ -42,19 +48,27 @@
       {{ item }}
     </view>
   </view>
-
 </view>
 
+<view class="weui-cells__title">Switch</view>
+<view class="weui-cells weui-cells_after-title">
+  <view class="weui-cell weui-cell_switch">
+    <view class="weui-cell__bd">Developer Mode</view>
+    <view class="weui-cell__ft">
+      <switch checked="{{ skeletonIsDev }}" bindchange="bindSwitchIsDev" />
+    </view>
+  </view>
+</view>
 <view class="weui-cells__title">
   Loading Type
 </view>
 <view class="weui-cells weui-cells_after-title">
   <radio-group bindchange="bindLoadingTypeChange">
-    <label class="weui-cell weui-check__label" wx:for="{{loadingTypes}}" wx:key="*this">
-      <radio class="weui-check" value="{{item}}" checked="{{item === selectedLoadingType}}"/>
+    <label class="weui-cell weui-check__label" wx:for="{{skeletonLoadingTypes}}" wx:key="*this">
+      <radio class="weui-check" value="{{item}}" checked="{{item === skeletonSelectedLoadingType}}"/>
 
       <view class="weui-cell__bd">{{item}}</view>
-      <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item === selectedLoadingType}}">
+      <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item === skeletonSelectedLoadingType}}">
         <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
       </view>
     </label>

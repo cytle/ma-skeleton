@@ -1,17 +1,36 @@
+const skeletonData = require('./skeletonData');
+
 Page({
   data: {
-    loadingTypes: ['spin', 'chiaroscuro', 'shine', 'null'],
-    selectedLoadingType: 'shine',
-    bgcolor: '#FFF',
+    pageIsReady: false,
+
+    skeletonLoadingTypes: ['spin', 'chiaroscuro', 'shine', 'null'],
+    skeletonSelectedLoadingType: 'shine',
+    skeletonIsDev: false,
+    skeletonBgcolor: '#FFF',
+    skeletonData,
+  },
+  onLoad() {
+    setTimeout(() => {
+      this.setData({
+        pageIsReady: true,
+      });
+    }, 2000);
+  },
+  bindSwitchIsDev(e) {
+    console.log(e);
+    this.setData({
+      skeletonIsDev: e.detail.value,
+    });
   },
   bindLoadingTypeChange(e) {
     this.setData({
-      selectedLoadingType: e.detail.value,
+      skeletonSelectedLoadingType: e.detail.value,
     });
   },
   binInputBgColor(e) {
     this.setData({
-      bgcolor: e.detail.value,
+      skeletonBgcolor: e.detail.value,
     });
   },
 })
