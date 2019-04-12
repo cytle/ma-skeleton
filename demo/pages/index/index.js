@@ -1,20 +1,17 @@
-//index.js
-//获取应用实例
-const app = getApp()
-
 Page({
   data: {
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
-
-    loadingTypes: ['spin', 'chiaroscuro', 'shine', '无'],
-    selectedLoadingType: '无',
+    loadingTypes: ['spin', 'chiaroscuro', 'shine', 'null'],
+    selectedLoadingType: 'shine',
+    bgcolor: '#FFF',
   },
   bindLoadingTypeChange(e) {
-
     this.setData({
       selectedLoadingType: e.detail.value,
+    });
+  },
+  binInputBgColor(e) {
+    this.setData({
+      bgcolor: e.detail.value,
     });
   },
 })

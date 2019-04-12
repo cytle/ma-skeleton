@@ -1,6 +1,6 @@
 <!--<canvas canvas-id="skeleton" disable-scroll="true"></canvas>-->
 <view
-  style="background-color: {{bgcolor}}; {{ isDev ? devData.container : data.container }}"
+  style="background-color: {{ bgcolor || '#FFF' }}; {{ isDev ? devData.container : data.container }}"
   class="skeleton skeleton_{{loading}}"
   wx:if="{{ isShowByDev }}"
 >

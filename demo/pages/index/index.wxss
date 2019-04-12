@@ -1,4 +1,8 @@
 /**index.wxss**/
+.page {
+  padding: 1px 0;
+}
+
 .userinfo {
   display: flex;
   flex-direction: column;
@@ -59,11 +63,40 @@
   padding-bottom: 10rpx;
 }
 .preview__btn {
-  width:180rpx;
-  line-height:60rpx;
-  border-radius:200rpx;
-  text-align:center;
-  font-size:28rpx;
-  color:#fff;
-  background-image:linear-gradient(-135deg, #E21712 0%, #FF613B 100%);
+  width: 180rpx;
+  line-height: 60rpx;
+  border-radius: 200rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #fff;
+  background-image: linear-gradient(-135deg, #E21712 0%, #FF613B 100%);
+}
+
+.category {
+  margin: 0 20rpx;
+  display: grid;
+  grid: repeat(4, 100rpx) / repeat(4, 1fr);
+  grid-gap: 20rpx;
+}
+
+.category__item {
+  background: #ccc;
+  font-size: 30rpx;
+  line-height: 2;
+  border-radius:16rpx;
+  box-shadow:0 4rpx 16rpx 0 rgba(0, 0, 0, 0.15);
+  padding: 0 20rpx;
+  color: #FFF;
+}
+
+.search-bar {
+  margin: 20rpx;
+  background: #FFF;
+  box-sizing: border-box;
+  border-radius: 40rpx;
+  box-shadow:0 4rpx 16rpx 0 rgba(0, 0, 0, 0.15);
+  padding: 10rpx 0rpx;
+  text-align: center;
+  color: #999;
+  font-size: 30rpx;
 }

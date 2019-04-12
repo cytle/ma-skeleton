@@ -61,25 +61,22 @@
 /* shine start */
 @keyframes flush {
   0% {
-    left: -100%;
-  }
-  50% {
-    left: 0;
+    transform: translate(-100%, -100%) rotate(45deg);
   }
   100% {
-    left: 100%;
+    transform: translate(100%, 100%) rotate(45deg);
   }
 }
 .skeleton__shine {
   animation: flush 2s linear infinite;
   position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 100%;
-  background: linear-gradient(to left,
-  rgba(255, 255, 255, 0) 0%,
+  top: -50%;
+  height: 200%;
+  width: 300px;
+  background: linear-gradient(to right,
+  transparent 10%,
   rgba(255, 255, 255, .85) 50%,
-  rgba(255, 255, 255, 0) 100%
+  transparent 90%
   );
   display: none;
 }
@@ -92,13 +89,13 @@
 /* chiaroscuro start */
 @keyframes chiaroscuro {
   0% {
-    opacity: .9;
+    opacity: .7;
   }
   50% {
     opacity: 1;
   }
   100% {
-    opacity: .9;
+    opacity: .7;
   }
 }
 

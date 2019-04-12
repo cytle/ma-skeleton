@@ -1,3 +1,22 @@
+const getScrollOffset = () => new Promise((resolve) => {
+  wx.createSelectorQuery().selectViewport().scrollOffset(resolve).exec();
+})
+
+
+/**
+ * 得到element信息
+ * @param {string} selector selector
+ * @returns {Promise<Object[]>}
+ */
+const getElements = selector => new Promise((resolve) => {
+  wx.createSelectorQuery().selectAll(selector).fields({
+    dataset: true,
+    id: true,
+    rect: true,
+    size: true,
+  }).exec(res => resolve(res[0]));
+});
+
 Component({
   properties: {
     isShow: {
@@ -37,7 +56,7 @@ Component({
       });
     },
     ouput(data) {
-      console.log('data', JSON.stringify(data, null, 2));
+      console.log(JSON.stringify(data, null, 2));
     },
     objToStyle(obj) {
       const { physicalRadio } = this.data;
@@ -45,17 +64,25 @@ Component({
         .map(key => `${key}:${obj[key] * physicalRadio}rpx`)
         .join(';');
     },
+
     calcData() {
-      return this.getElements(`.${this.data.selector}`)
-        .then(([container]) => {
-          const { width, height, top, left } = container;
-          console.log(container);
-          return this.calcStyleLists(container)
-            .then(lists => ({
-              container: this.objToStyle({ width, height, top, left }),
-              lists,
-            }));
-        });
+      return Promise.all([
+        getScrollOffset(),
+        getElements(`.${this.data.selector}`),
+      ]).then(([scrollOffset, [container]]) => {
+        const { width, height, top, left } = container;
+        console.log(container);
+        return this.calcStyleLists(container)
+          .then(lists => ({
+            container: this.objToStyle({
+              width,
+              height,
+              top: top + scrollOffset.scrollTop,
+              left: left + scrollOffset.scrollLeft,
+            }),
+            lists,
+          }));
+      });
     },
     calcStyleLists(container) {
       const { top, left, right, bottom } = container;
@@ -66,7 +93,7 @@ Component({
       } = this.data;
 
       const promises = selectorTypes
-        .map(type => this.getElements(`.${selector}-${type}`)
+        .map(type => getElements(`.${selector}-${type}`)
           .then(elements => elements
             .filter(vo =>
               vo.left < right
@@ -87,22 +114,5 @@ Component({
       return Promise.all(promises);
     },
 
-    /**
-     * 得到element信息
-     * @param {string} selector selector
-     * @returns {Promise<Object[]>}
-     */
-    getElements(selector) {
-      return new Promise((resolve) => {
-        wx.createSelectorQuery().selectAll(selector).fields({
-          dataset: true,
-          id: true,
-          rect: true,
-          size: true,
-        }).exec((res) => {
-          resolve(res[0]);
-        });
-      });
-    },
   },
 });
