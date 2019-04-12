@@ -1,24 +1,39 @@
 Component({
   properties: {
-    bgcolor: {
-      type: String,
-      value: '#FFF',
-    },
-    isDev: {
-      type: Boolean,
-      value: false,
-    },
+    /**
+     * 骨架屏数据
+     */
     data: {
       type: Object,
       value: null,
     },
-    loading: {
-      type: String,
-      value: '', // 'spin', 'chiaroscuro', 'shine'
+    /**
+     * 是否是开发模式，如果为true, 则显示生成按钮
+     */
+    isDev: {
+      type: Boolean,
+      value: false,
     },
+    /**
+     * 选择器名字
+     */
     selector: {
       type: String,
       value: 'skeleton',
+    },
+    /**
+     * 骨架屏背景
+     */
+    bgcolor: {
+      type: String,
+      value: '#FFF',
+    },
+    /**
+     * 骨架屏动画效果，可以是如下值: 'spin', 'chiaroscuro', 'shine'
+     */
+    loading: {
+      type: String,
+      value: '',
     },
   },
   data: {

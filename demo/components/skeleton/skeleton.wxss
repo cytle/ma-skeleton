@@ -72,11 +72,11 @@
   position: absolute;
   top: -50%;
   height: 200%;
-  width: 300px;
+  width: 500px;
   background: linear-gradient(to right,
-  transparent 10%,
+  rgba(255, 255, 255, 0) 10%,
   rgba(255, 255, 255, .85) 50%,
-  transparent 90%
+  rgba(255, 255, 255, 0) 90%
   );
   display: none;
 }
