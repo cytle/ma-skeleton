@@ -1,10 +1,10 @@
 <!--<canvas canvas-id="skeleton" disable-scroll="true"></canvas>-->
 <view
-  style="width: {{skeletonWidth}}px; height: {{skeletonHeight}}px; background-color: {{bgcolor}};"
+  style="background-color: {{bgcolor}}; {{ isDev ? devData.container : data.container }}"
   class="skeleton skeleton_{{loading}}"
   wx:if="{{ isShowByDev }}"
 >
-  <block wx:for="{{ isDev ? devData.elements : data.element }}" wx:for-item="list" wx:key="type">
+  <block wx:for="{{ isDev ? devData.lists : data.lists }}" wx:for-item="list" wx:key="type">
     <view
       wx:for="{{ list.elements }}"
       wx:for-item="item"
@@ -15,7 +15,7 @@
   <view class="skeleton__spinbox">
     <view class="skeleton__spin" />
   </view>
-  <view class="skeleton__shine" />
+  <view class="skeleton__shine"/>
 </view>
 <view wx:else>
   <slot></slot>

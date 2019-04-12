@@ -18,9 +18,17 @@
   border-radius: 200rpx;
 }
 
+/* spin start */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 .skeleton__spinbox{
-  position: fixed;
-  display: flex;
+  position: absolute;
   justify-content: center;
   align-items: center;
   height: 100%;
@@ -44,27 +52,13 @@
   border-color: #409eff transparent #409eff transparent;
   animation: spin 1.2s linear infinite;
 }
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
 
-@keyframes blink {
-  0% {
-    opacity: .9;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: .9;
-  }
+.skeleton_spin .skeleton__spinbox {
+  display: flex;
 }
+/* spin end */
 
+/* shine start */
 @keyframes flush {
   0% {
     left: -100%;
@@ -89,11 +83,28 @@
   );
   display: none;
 }
-.skeleton_chiaroscuro .skeleton__item {
-  animation-duration: 2s;
-  animation-name: blink;
-  animation-iteration-count: infinite;
-}
-.skeleton_shine .skeleton__shine, .skeleton_spin .skeleton__spin {
+
+.skeleton_shine .skeleton__shine {
   display: block;
 }
+/* shine end */
+
+/* chiaroscuro start */
+@keyframes chiaroscuro {
+  0% {
+    opacity: .9;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: .9;
+  }
+}
+
+.skeleton_chiaroscuro .skeleton__item {
+  animation-duration: 2s;
+  animation-name: chiaroscuro;
+  animation-iteration-count: infinite;
+}
+/* chiaroscuro end */

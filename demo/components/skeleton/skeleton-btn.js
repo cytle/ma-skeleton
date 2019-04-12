@@ -30,33 +30,61 @@ Component({
         this.triggerEvent('toggleShow', false);
         return;
       }
-      this.calcStyleLists().then((styleLists) => {
-        this.ouput(styleLists);
-        this.triggerEvent('updateData', styleLists);
+      this.calcData().then((data) => {
+        this.ouput(data);
+        this.triggerEvent('updateData', data);
         this.triggerEvent('toggleShow', true);
       });
     },
-    ouput(styleLists) {
-      console.log('styleLists', JSON.stringify(styleLists, null, 2));
+    ouput(data) {
+      console.log('data', JSON.stringify(data, null, 2));
     },
-    calcStyleLists() {
+    objToStyle(obj) {
+      const { physicalRadio } = this.data;
+      return Object.keys(obj)
+        .map(key => `${key}:${obj[key] * physicalRadio}rpx`)
+        .join(';');
+    },
+    calcData() {
+      return this.getElements(`.${this.data.selector}`)
+        .then(([container]) => {
+          const { width, height, top, left } = container;
+          console.log(container);
+          return this.calcStyleLists(container)
+            .then(lists => ({
+              container: this.objToStyle({ width, height, top, left }),
+              lists,
+            }));
+        });
+    },
+    calcStyleLists(container) {
+      const { top, left, right, bottom } = container;
+
       const {
         selector,
         selectorTypes,
       } = this.data;
 
-      const elementsPromise = Promise.all(selectorTypes
+      const promises = selectorTypes
         .map(type => this.getElements(`.${selector}-${type}`)
-          .then(elements => ({ type, elements })),
-      ));
+          .then(elements => elements
+            .filter(vo =>
+              vo.left < right
+              && vo.right > left
+              && vo.top < bottom
+              && vo.bottom > top
+            )
+            .map(vo => this.objToStyle({
+              width: vo.width,
+              height: vo.height,
+              left: vo.left - left,
+              top: vo.top - top,
+            }))
+          )
+          .then(elements => ({ type, elements }))
+        );
 
-      return Promise.all([
-        this.getElements(`.${selector}`),
-        elementsPromise,
-      ]).then(([container, elements]) => ({
-        container: container[0] || '',
-        elements,
-      }));
+      return Promise.all(promises);
     },
 
     /**
@@ -72,15 +100,7 @@ Component({
           rect: true,
           size: true,
         }).exec((res) => {
-          const offestKeys = ['width', 'height', 'left', 'top'];
-          const { physicalRadio } = this.data;
-
-          const elements = res[0]
-            .map(vo => offestKeys
-              .map(key => `${key}:${vo[key] * physicalRadio}rpx`)
-              .join(';'),
-            );
-          resolve(elements)
+          resolve(res[0]);
         });
       });
     },

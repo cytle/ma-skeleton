@@ -11,6 +11,6 @@
   font-size: 24rpx;
   text-align: center;
   background-color: #ff613b;
-  background-image: linear-gradient(135deg, #ff613b 0%, #d30500 100%);
+  background-image: linear-gradient(90deg, #ff613b 0%, #d30500 100%);
   box-shadow: 0 4px 8px 0 rgba(240, 60, 39, 0.3);
 }
