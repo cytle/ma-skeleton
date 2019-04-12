@@ -57,7 +57,7 @@ index.wxml
 
 点击右下角按钮会预览骨架屏，同时在控制台会生成骨架屏数据，这时候想办法保存数据，然后再引入数据，这样就可以得到骨架屏了
 
-![生成骨架屏数据](./media/create-data.png)
+![生成骨架屏数据](https://github.com/cytle/ma-skeleton/raw/5664f612a64a02b06ef36f8e71ba7449b0e33128/media/create-data.png)
 
 ## 骨架支持的元素
 
@@ -114,4 +114,4 @@ index.wxml
 
 ## demo
 
-![demo](./media/demo.gif)
+![demo](https://github.com/cytle/ma-skeleton/raw/5664f612a64a02b06ef36f8e71ba7449b0e33128/media/demo.gif)
