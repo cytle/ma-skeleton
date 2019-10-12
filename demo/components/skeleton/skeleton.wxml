@@ -8,6 +8,8 @@
     <view
       wx:for="{{ list.elements }}"
       wx:for-item="item"
+      wx:for-index="index"
+      wx:key="{{ index }}"
       class="skeleton__item skeleton__item_{{ list.type }}"
       style="{{ item }}"
     />

@@ -74,5 +74,8 @@ typings/
 # FuseBox cache
 .fusebox/
 
-#DynamoDB Local files
+# DynamoDB Local files
 .dynamodb/
+
+# MacOS folder icon cache
+.DS_Store
