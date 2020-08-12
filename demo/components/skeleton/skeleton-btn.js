@@ -93,7 +93,7 @@ Component({
       } = this.data;
 
       const promises = selectorTypes
-        .map(type => getElements(`.${selector}-${type}`)
+        .map(type => getElements(`.${this.data.selector} >>> .${selector}-${type}`)
           .then(elements => elements
             .filter(vo =>
               vo.left < right
