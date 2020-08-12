@@ -50,12 +50,12 @@ Component({
         return;
       }
       this.calcData().then((data) => {
-        this.ouput(data);
+        this.output(data);
         this.triggerEvent('updateData', data);
         this.triggerEvent('toggleShow', true);
       });
     },
-    ouput(data) {
+    output(data) {
       console.log(JSON.stringify(data, null, 2));
     },
     objToStyle(obj) {
@@ -93,7 +93,7 @@ Component({
       } = this.data;
 
       const promises = selectorTypes
-        .map(type => getElements(`.${selector}-${type}`)
+        .map(type => getElements(`.${this.data.selector} >>> .${selector}-${type}`)
           .then(elements => elements
             .filter(vo =>
               vo.left < right
