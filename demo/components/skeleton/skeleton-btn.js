@@ -50,12 +50,12 @@ Component({
         return;
       }
       this.calcData().then((data) => {
-        this.ouput(data);
+        this.output(data);
         this.triggerEvent('updateData', data);
         this.triggerEvent('toggleShow', true);
       });
     },
-    ouput(data) {
+    output(data) {
       console.log(JSON.stringify(data, null, 2));
     },
     objToStyle(obj) {
